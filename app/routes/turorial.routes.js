@@ -6,15 +6,16 @@ module.exports = app => {
   // Create a new Product
   router.post("/", tutorials.create);
 
-  // Retrieve all Products
   router.get("/", tutorials.findAll);
+  router.get("/type", tutorials.findAlltype);
+  router.get("/NomType", tutorials.findNomType);
+  // Retrieve all Products
 
   // Retrieve all published Products
   router.get("/published", tutorials.findAllPublished);
 
   // Retrieve a single Product with id
   router.get("/:id", tutorials.findOne);
-
   // Update a Product with id
   router.put("/:id", tutorials.update);
 
@@ -24,5 +25,6 @@ module.exports = app => {
   // Create a new Product
   router.delete("/", tutorials.deleteAll);
 
+  
   app.use("/api/produits", router);
 };

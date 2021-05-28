@@ -50,6 +50,7 @@ exports.findAll = (req, res) => {
     });
 };
 
+
 // Find a single Tutorial with an id
 exports.findOne = (req, res) => {
   const id = req.params.id;
@@ -144,3 +145,36 @@ exports.findAllPublished = (req, res) => {
       });
     });
 };
+
+exports.findAlltype = (req, res) => {
+  const type = req.query.type;
+  var condition = type ? { type: { $regex: new RegExp(type), $options: "i" } } : {};
+
+  Tutorial.find(condition )
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Une erreur s'est produite lors de la récupération du produit."
+      });
+    });
+};
+
+exports.findNomType = (req, res) => {
+  Tutorial.find({ nom: req.query.nom, type: req.query.type })
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Une erreur s'est produite lors de la récupération des produits."
+      });
+    });
+};
+
+ 
+
+  
